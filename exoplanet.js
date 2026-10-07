@@ -3,7 +3,7 @@
 // © gunout
 // ============================================================
 
-const EXO_API = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync'\;
+const EXO_API = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync'
 const EXO_QUERY = 'select+top+50+pl_name,hostname,discoveryyear,pl_rade,pl_masse,pl_orbsmax+from+pscomppars+order+by+discoveryyear+desc&format=json';
 
 // Proxies CORS (essayés dans l'ordre)
