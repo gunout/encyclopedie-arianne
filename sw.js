@@ -3,7 +3,7 @@
 // © gunout
 // ============================================================
 
-const CACHE_NAME = 'esa-enc-v1';
+const CACHE_NAME = 'esa-enc-v2';
 const ASSETS = [
   '/',
   '/index.html',
