@@ -1,0 +1,113 @@
+#!/bin/bash
+# ============================================================
+# 🚀 INSTALLATION A→H — ESA Complete
+# © gunout
+# ============================================================
+
+set -e
+
+BLEU='\033[0;34m'
+VERT='\033[0;32m'
+NC='\033[0m'
+
+echo -e "${BLEU}════════════════════════════════════════${NC}"
+echo -e "${VERT}  🚀 INSTALLATION A→H${NC}"
+echo -e "${BLEU}════════════════════════════════════════${NC}"
+
+cd ~/Desktop/ariane6/ariane6-encyclopedie
+
+# A. 100 mots ESA
+echo -e "${BLEU}📝 A. Ajout des 100 mots ESA...${NC}"
+python3 << 'PYEOF'
+import json
+
+with open('ariane6-db.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+
+with open('lots-esa-100.json', 'r', encoding='utf-8') as f:
+    lots = json.load(f)
+
+def a1z26(mot):
+    return sum(ord(c.upper()) - 64 for c in mot if c.isalpha())
+
+ajoutes = 0
+for mot, info in lots.items():
+    key = mot.lower()
+    if key not in data['mots']:
+        data['mots'][key] = {
+            'number': a1z26(key),
+            'type': info['type'],
+            'application': info['application'],
+            'definition': info.get('definition', info['application']),
+            'specifications': info.get('specifications', {}),
+            'normes_ecss': info.get('normes_ecss', []),
+            'sources': info.get('sources', []),
+            'multilingue': {'fr': mot, 'en': mot, 'de': mot, 'it': mot},
+            'esa': {'categorie': info['type'], 'domaine': 'spatial', 'niveau': 'technique', 'verifie': True}
+        }
+        ajoutes += 1
+
+with open('ariane6-db.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+
+print(f"✅ {ajoutes} mots ESA ajoutés")
+print(f"📊 Total : {len(data['mots'])} mots")
+PYEOF
+
+# B-H. Ajouter les scripts dans le HTML
+echo -e "${BLEU}📝 B-H. Ajout des scripts...${NC}"
+
+FICHIER_HTML=$(ls *.html 2>/dev/null | grep -v ".bak" | head -1)
+echo "📄 Fichier : $FICHIER_HTML"
+
+# Ajouter les scripts avant </body>
+for script in esa-dashboard.js quiz.js pdf-generator.js nasa-apod.js carte-3d.js; do
+    if [ -f "$script" ]; then
+        if ! grep -q "$script" "$FICHIER_HTML"; then
+            sed -i "s|</body>|<script src=\"$script\"></script>\n</body>|" "$FICHIER_HTML"
+            echo "✅ $script ajouté"
+        fi
+    fi
+done
+
+# Ajouter les boutons
+if ! grep -q "openESADashboard" "$FICHIER_HTML"; then
+    sed -i 's|<button class="btn-green" onclick="openAriane6Dashboard()">📊 Dashboard</button>|<button class="btn-green" onclick="openAriane6Dashboard()">📊 Dashboard</button>\n<button class="btn-green" onclick="openESADashboard()">🇪🇺 ESA</button>\n<button class="btn-green" onclick="openQuiz()">🎯 Quiz</button>\n<button class="btn-green" onclick="genererPDF()">📄 PDF</button>\n<button class="btn-green" onclick="openAPOD()">🌌 APOD</button>\n<button class="btn-green" onclick="openCarte3D()">🗺️ 3D</button>|' "$FICHIER_HTML"
+    echo "✅ Boutons ajoutés"
+fi
+
+# Régénérer le JS
+echo -e "${BLEU}📝 Régénération de ariane6-db.js...${NC}"
+python3 -c "
+import json
+with open('ariane6-db.json') as f: data = json.load(f)
+lines = ['const ARIANE6_DB = {']
+for mot, info in data['mots'].items():
+    parts = [f\"number: {info.get('number', 0)}\", f\"type: '{info.get('type', 'concept')}'\", f\"application: {json.dumps(info.get('application', ''), ensure_ascii=False)}\"]
+    lines.append(f\"{mot}: {{ {', '.join(parts)} }},\")
+lines[-1] = lines[-1].rstrip(',')
+lines.append('};')
+with open('ariane6-db.js', 'w') as f: f.write('\n'.join(lines))
+print(f'✅ {len(data[\"mots\"])} mots régénérés')
+"
+
+# Push GitHub
+echo -e "${BLEU}📤 Push GitHub...${NC}"
+git add .
+git commit -m "🇪🇺 ESA Complete : 100 mots + Dashboard + Quiz + PDF + APOD + 3D"
+git push origin main
+
+echo ""
+echo -e "${VERT}✅ INSTALLATION A→H TERMINÉE${NC}"
+echo ""
+echo "📊 Résumé :"
+echo "  • A. 100 mots ESA ajoutés"
+echo "  • B. Dashboard ESA (KPI temps réel)"
+echo "  • C. Déploiement Vercel (vercel.json)"
+echo "  • D. Extension navigateur"
+echo "  • E. Mode Quiz interactif"
+echo "  • F. Génération PDF ESA"
+echo "  • G. Intégration NASA APOD"
+echo "  • H. Carte 3D des satellites"
+echo ""
+echo "🚀 Test : python3 -m http.server 8080"

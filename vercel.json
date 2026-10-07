@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "encyclopedie-ariane6",
+  "builds": [
+    { "src": "ariane6-api.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static" },
+    { "src": "*.json", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/ariane6-api.js" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

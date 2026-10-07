@@ -1,0 +1,534 @@
+{
+  "vulcain": {
+    "number": 82, "type": "moteur", "application": "Étage principal (EPC)",
+    "definition": "Moteur cryogénique LH2/LOX de l'étage principal d'Ariane 6.",
+    "specifications": { "poussee": "137 t (vide)", "isp": "430 s", "masse": "1800 kg", "ergols": "LH2/LOX", "cycle": "générateur de gaz", "pression": "110 bar" },
+    "normes_ecss": ["ECSS-E-ST-35C", "ECSS-E-ST-35-03C"],
+    "sources": [{ "titre": "Ariane 6 User Manual", "url": "https://www.arianespace.com", "type": "specification" }],
+    "multilingue": { "fr": "Vulcain", "en": "Vulcain engine", "de": "Vulcain-Triebwerk", "it": "Motore Vulcain" }
+  },
+  "vinci": {
+    "number": 57, "type": "moteur", "application": "Étage supérieur (ESC)",
+    "definition": "Moteur cryogénique LH2/LOX réallumable de l'étage supérieur d'Ariane 6.",
+    "specifications": { "poussee": "180 kN", "isp": "457 s", "masse": "550 kg", "ergols": "LH2/LOX", "cycle": "expander", "reallumage": "3 fois" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ESA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Vinci", "en": "Vinci engine", "de": "Vinci-Triebwerk", "it": "Motore Vinci" }
+  },
+  "p120c": {
+    "number": 19, "type": "booster", "application": "Boosters Ariane 6 / Vega-C",
+    "definition": "Propulseur d'appoint à propergol solide commun à Ariane 6 et Vega-C.",
+    "specifications": { "poussee": "120 t", "masse_propergol": "142 t", "diametre": "3.4 m", "hauteur": "11.7 m", "ergols": "HTPB/AP" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ArianeGroup", "url": "https://www.ariane.group", "type": "industriel" }],
+    "multilingue": { "fr": "P120C", "en": "P120C booster", "de": "P120C-Booster", "it": "Booster P120C" }
+  },
+  "p160c": {
+    "number": 19, "type": "booster", "application": "Boosters Block 2",
+    "definition": "Propulseur d'appoint à propergol solide d'Ariane 6 Block 2, version allongée du P120C.",
+    "specifications": { "poussee": "156 t", "masse_propergol": "156 t", "diametre": "3.4 m", "hauteur": "12.7 m" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ESA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "P160C", "en": "P160C booster", "de": "P160C-Booster", "it": "Booster P160C" }
+  },
+  "ariane6": {
+    "number": 48, "type": "lanceur", "application": "Lanceur lourd européen",
+    "definition": "Lanceur européen lourd de nouvelle génération, successeur d'Ariane 5.",
+    "specifications": { "hauteur": "63 m", "masse": "530 t", "leo": "21650 kg", "gto": "11500 kg", "sso": "14600 kg", "poussee": "1100 t" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "ESA Ariane 6", "url": "https://www.esa.int/Enabling_Support/Space_Transportation/Ariane_6", "type": "site_officiel" }],
+    "multilingue": { "fr": "Ariane 6", "en": "Ariane 6", "de": "Ariane 6", "it": "Ariane 6" }
+  },
+  "ariane5": {
+    "number": 48, "type": "lanceur", "application": "Lanceur lourd (1996-2023)",
+    "definition": "Lanceur européen lourd, référence mondiale pour les lancements GTO.",
+    "specifications": { "hauteur": "53 m", "masse": "780 t", "leo": "21000 kg", "gto": "10500 kg", "lancements": "117" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "ESA Ariane 5", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Ariane 5", "en": "Ariane 5", "de": "Ariane 5", "it": "Ariane 5" }
+  },
+  "vega": {
+    "number": 35, "type": "lanceur", "application": "Lanceur léger européen",
+    "definition": "Lanceur léger européen pour charges utiles en orbite basse.",
+    "specifications": { "hauteur": "30 m", "masse": "137 t", "leo": "1500 kg", "sso": "1200 kg" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "ESA Vega", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Vega", "en": "Vega", "de": "Vega", "it": "Vega" }
+  },
+  "geo": {
+    "number": 27, "type": "orbite", "application": "Orbite géostationnaire",
+    "definition": "Orbite circulaire équatoriale à 35 786 km d'altitude.",
+    "specifications": { "altitude": "35786 km", "periode": "23h56m4s", "vitesse": "3.07 km/s", "inclinaison": "0°" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ITU-R", "url": "https://www.itu.int", "type": "standard" }],
+    "multilingue": { "fr": "Orbite géostationnaire", "en": "Geostationary orbit", "de": "Geostationäre Umlaufbahn", "it": "Orbita geostazionaria" }
+  },
+  "leo": {
+    "number": 32, "type": "orbite", "application": "Orbite terrestre basse",
+    "definition": "Orbite terrestre basse entre 200 et 2000 km d'altitude.",
+    "specifications": { "altitude": "200-2000 km", "periode": "90 min", "vitesse": "7.8 km/s", "usage": "ISS, Starlink, observation" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA Space Debris", "url": "https://www.esa.int/Space_Safety/Space_Debris", "type": "site_officiel" }],
+    "multilingue": { "fr": "Orbite basse", "en": "Low Earth Orbit", "de": "Niedrige Erdumlaufbahn", "it": "Orbita terrestre bassa" }
+  },
+  "gto": {
+    "number": 42, "type": "orbite", "application": "Orbite de transfert géostationnaire",
+    "definition": "Orbite elliptique intermédiaire entre LEO et GEO.",
+    "specifications": { "perigee": "200 km", "apogee": "35786 km", "inclinaison": "28.5°", "periode": "10h30" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "Arianespace", "url": "https://www.arianespace.com", "type": "industriel" }],
+    "multilingue": { "fr": "Orbite de transfert", "en": "Geostationary Transfer Orbit", "de": "Geostationäre Transferbahn", "it": "Orbita di trasferimento" }
+  },
+  "sso": {
+    "number": 34, "type": "orbite", "application": "Orbite héliosynchrone",
+    "definition": "Orbite polaire synchrone avec le Soleil, passage à heure fixe.",
+    "specifications": { "altitude": "600-800 km", "inclinaison": "98°", "periode": "100 min", "usage": "observation Terre" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA Copernicus", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Orbite héliosynchrone", "en": "Sun-Synchronous Orbit", "de": "Sonnensynchrone Umlaufbahn", "it": "Orbita eliosincrona" }
+  },
+  "kourou": {
+    "number": 101, "type": "site", "application": "Centre spatial guyanais",
+    "definition": "Port spatial de l'Europe en Guyane française.",
+    "specifications": { "latitude": "5.2° N", "superficie": "700 km²", "pas_de_tir": "ELA-1 à ELA-4", "lancements_an": "12-15" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "CNES", "url": "https://www.cnes.fr", "type": "site_officiel" }],
+    "multilingue": { "fr": "Centre spatial guyanais", "en": "Guiana Space Centre", "de": "Weltraumbahnhof Kourou", "it": "Centro Spaziale Guianese" }
+  },
+  "iss": {
+    "number": 47, "type": "station", "application": "Station spatiale internationale",
+    "definition": "Station spatiale internationale en orbite basse.",
+    "specifications": { "altitude": "400 km", "masse": "420 t", "volume": "388 m³", "equipage": "6-7", "retrait": "2030" },
+    "normes_ecss": ["ECSS-E-ST-31C"],
+    "sources": [{ "titre": "ESA ISS", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Station spatiale internationale", "en": "International Space Station", "de": "Internationale Raumstation", "it": "Stazione Spaziale Internazionale" }
+  },
+  "galileo": {
+    "number": 61, "type": "telecom", "application": "Navigation européenne",
+    "definition": "Système européen de navigation par satellite (GNSS).",
+    "specifications": { "operateur": "EUSPA", "satellites": "28", "altitude": "23222 km", "precision": "< 1 m" },
+    "normes_ecss": ["ECSS-E-ST-50C"],
+    "sources": [{ "titre": "EUSPA", "url": "https://www.euspa.europa.eu", "type": "site_officiel" }],
+    "multilingue": { "fr": "Galileo", "en": "Galileo", "de": "Galileo", "it": "Galileo" }
+  },
+  "copernicus": {
+    "number": 123, "type": "telecom", "application": "Observation de la Terre",
+    "definition": "Programme européen d'observation de la Terre.",
+    "specifications": { "operateur": "ESA", "missions": "6 familles Sentinel", "donnees": "16 To/jour", "acces": "gratuit" },
+    "normes_ecss": ["ECSS-E-ST-50C"],
+    "sources": [{ "titre": "Copernicus", "url": "https://www.copernicus.eu", "type": "site_officiel" }],
+    "multilingue": { "fr": "Copernicus", "en": "Copernicus", "de": "Copernicus", "it": "Copernicus" }
+  },
+  "ecss": {
+    "number": 43, "type": "droit", "application": "Normes spatiales européennes",
+    "definition": "European Cooperation for Space Standardization.",
+    "specifications": { "fondation": "1993", "normes": "500+", "domaines": ["management", "ingénierie", "assurance"] },
+    "normes_ecss": ["ECSS-M-ST-00C"],
+    "sources": [{ "titre": "ECSS", "url": "https://ecss.nl", "type": "standard" }],
+    "multilingue": { "fr": "ECSS", "en": "ECSS", "de": "ECSS", "it": "ECSS" }
+  },
+  "ccsds": {
+    "number": 55, "type": "droit", "application": "Standards spatiaux internationaux",
+    "definition": "Consultative Committee for Space Data Systems.",
+    "specifications": { "fondation": "1982", "standards": "200+", "domaines": ["télémesure", "télécommande", "réseaux"] },
+    "normes_ecss": ["ECSS-E-ST-50C"],
+    "sources": [{ "titre": "CCSDS", "url": "https://public.ccsds.org", "type": "standard" }],
+    "multilingue": { "fr": "CCSDS", "en": "CCSDS", "de": "CCSDS", "it": "CCSDS" }
+  },
+  "starlink": {
+    "number": 110, "type": "telecom", "application": "Constellation SpaceX",
+    "definition": "Constellation de satellites de télécommunications de SpaceX.",
+    "specifications": { "satellites": "~5500", "altitude": "550 km", "debit": "100-200 Mbps", "latence": "20-40 ms" },
+    "normes_ecss": [],
+    "sources": [{ "titre": "Starlink", "url": "https://www.starlink.com", "type": "industriel" }],
+    "multilingue": { "fr": "Starlink", "en": "Starlink", "de": "Starlink", "it": "Starlink" }
+  },
+  "oneweb": {
+    "number": 78, "type": "telecom", "application": "Constellation OneWeb",
+    "definition": "Constellation de satellites de télécommunications en LEO.",
+    "specifications": { "satellites": "648", "altitude": "1200 km", "bande": "Ku", "debit": "50-200 Mbps" },
+    "normes_ecss": [],
+    "sources": [{ "titre": "OneWeb", "url": "https://oneweb.net", "type": "industriel" }],
+    "multilingue": { "fr": "OneWeb", "en": "OneWeb", "de": "OneWeb", "it": "OneWeb" }
+  },
+  "kuiper": {
+    "number": 82, "type": "telecom", "application": "Constellation Amazon",
+    "definition": "Constellation de satellites de télécommunications d'Amazon.",
+    "specifications": { "satellites": "3236 prévus", "altitude": "590-630 km", "bande": "Ka" },
+    "normes_ecss": [],
+    "sources": [{ "titre": "Amazon Kuiper", "url": "https://www.aboutamazon.com", "type": "industriel" }],
+    "multilingue": { "fr": "Kuiper", "en": "Kuiper", "de": "Kuiper", "it": "Kuiper" }
+  },
+  "iss-orbit": {
+    "number": 96, "type": "orbite", "application": "Orbite de l'ISS",
+    "definition": "Orbite basse de la Station spatiale internationale.",
+    "specifications": { "altitude": "400 km", "inclinaison": "51.6°", "periode": "92 min", "vitesse": "7.66 km/s" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Orbite ISS", "en": "ISS orbit", "de": "ISS-Umlaufbahn", "it": "Orbita ISS" }
+  },
+  "ariane64": {
+    "number": 66, "type": "lanceur", "application": "Ariane 64 configuration",
+    "definition": "Version d'Ariane 6 avec 4 boosters P120C pour charges lourdes.",
+    "specifications": { "boosters": "4 × P120C", "leo": "21650 kg", "gto": "11500 kg", "sso": "14600 kg" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "Ariane 6", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Ariane 64", "en": "Ariane 64", "de": "Ariane 64", "it": "Ariane 64" }
+  },
+  "ariane62": {
+    "number": 66, "type": "lanceur", "application": "Ariane 62 configuration",
+    "definition": "Version d'Ariane 6 avec 2 boosters P120C.",
+    "specifications": { "boosters": "2 × P120C", "leo": "10350 kg", "gto": "5000 kg", "sso": "7000 kg" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "ESA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Ariane 62", "en": "Ariane 62", "de": "Ariane 62", "it": "Ariane 62" }
+  },
+  "ariane-group": {
+    "number": 121, "type": "agence", "application": "Industriel européen",
+    "definition": "Constructeur d'Ariane 6 (Airbus + Safran).",
+    "specifications": { "fondation": "2015", "siege": "Issy-les-Moulineaux", "employes": "8000+" },
+    "sources": [{ "titre": "ArianeGroup", "url": "https://www.ariane.group", "type": "industriel" }],
+    "multilingue": { "fr": "ArianeGroup", "en": "ArianeGroup", "de": "ArianeGroup", "it": "ArianeGroup" }
+  },
+  "arianespace": {
+    "number": 122, "type": "agence", "application": "Opérateur de lancement",
+    "definition": "Opérateur commercial des lanceurs Ariane et Vega.",
+    "specifications": { "fondation": "1980", "siege": "Évry", "employes": "300", "lancements": "500+" },
+    "sources": [{ "titre": "Arianespace", "url": "https://www.arianespace.com", "type": "industriel" }],
+    "multilingue": { "fr": "Arianespace", "en": "Arianespace", "de": "Arianespace", "it": "Arianespace" }
+  },
+  "cnes": {
+    "number": 41, "type": "agence", "application": "Agence spatiale française",
+    "definition": "Centre national d'études spatiales.",
+    "specifications": { "fondation": "1961", "siege": "Paris", "employes": "2400", "budget": "2.4 Md€" },
+    "sources": [{ "titre": "CNES", "url": "https://www.cnes.fr", "type": "site_officiel" }],
+    "multilingue": { "fr": "CNES", "en": "CNES", "de": "CNES", "it": "CNES" }
+  },
+  "esa": {
+    "number": 25, "type": "agence", "application": "Agence spatiale européenne",
+    "definition": "Agence spatiale européenne.",
+    "specifications": { "fondation": "1975", "siege": "Paris", "employes": "2200", "budget": "7.5 Md€", "membres": "22" },
+    "sources": [{ "titre": "ESA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "ESA", "en": "ESA", "de": "ESA", "it": "ESA" }
+  },
+  "nasa": {
+    "number": 35, "type": "agence", "application": "Agence spatiale américaine",
+    "definition": "National Aeronautics and Space Administration.",
+    "specifications": { "fondation": "1958", "siege": "Washington DC", "employes": "17000", "budget": "73 Md€" },
+    "sources": [{ "titre": "NASA", "url": "https://www.nasa.gov", "type": "site_officiel" }],
+    "multilingue": { "fr": "NASA", "en": "NASA", "de": "NASA", "it": "NASA" }
+  },
+  "eumetsat": {
+    "number": 90, "type": "agence", "application": "Satellites météo européens",
+    "definition": "Organisation européenne pour l'exploitation des satellites météorologiques.",
+    "specifications": { "fondation": "1986", "siege": "Darmstadt", "satellites": "Meteosat, Metop, Sentinel-3" },
+    "sources": [{ "titre": "EUMETSAT", "url": "https://www.eumetsat.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "EUMETSAT", "en": "EUMETSAT", "de": "EUMETSAT", "it": "EUMETSAT" }
+  },
+  "eutelsat": {
+    "number": 112, "type": "telecom", "application": "Opérateur satellite européen",
+    "definition": "Opérateur européen de satellites de télécommunications.",
+    "specifications": { "fondation": "1977", "siege": "Paris", "satellites": "35+", "couverture": "Europe, Afrique, Asie" },
+    "sources": [{ "titre": "Eutelsat", "url": "https://www.eutelsat.com", "type": "industriel" }],
+    "multilingue": { "fr": "Eutelsat", "en": "Eutelsat", "de": "Eutelsat", "it": "Eutelsat" }
+  },
+  "ses": {
+    "number": 39, "type": "telecom", "application": "Opérateur satellite mondial",
+    "definition": "SES (Société Européenne des Satellites).",
+    "specifications": { "fondation": "1985", "siege": "Luxembourg", "satellites": "70+" },
+    "sources": [{ "titre": "SES", "url": "https://www.ses.com", "type": "industriel" }],
+    "multilingue": { "fr": "SES", "en": "SES", "de": "SES", "it": "SES" }
+  },
+  "intelsat": {
+    "number": 103, "type": "telecom", "application": "Opérateur satellite mondial",
+    "definition": "Intelsat (International Telecommunications Satellite Organization).",
+    "specifications": { "fondation": "1964", "siege": "Luxembourg", "satellites": "50+" },
+    "sources": [{ "titre": "Intelsat", "url": "https://www.intelsat.com", "type": "industriel" }],
+    "multilingue": { "fr": "Intelsat", "en": "Intelsat", "de": "Intelsat", "it": "Intelsat" }
+  },
+  "inmarsat": {
+    "number": 108, "type": "telecom", "application": "Satellites maritimes",
+    "definition": "Opérateur satellite pour communications mobiles maritimes.",
+    "specifications": { "fondation": "1979", "siege": "Londres", "satellites": "14" },
+    "sources": [{ "titre": "Inmarsat", "url": "https://www.inmarsat.com", "type": "industriel" }],
+    "multilingue": { "fr": "Inmarsat", "en": "Inmarsat", "de": "Inmarsat", "it": "Inmarsat" }
+  },
+  "iridium": {
+    "number": 88, "type": "telecom", "application": "Constellation téléphonie",
+    "definition": "Constellation de 66 satellites pour téléphonie par satellite.",
+    "specifications": { "fondation": "1998", "satellites": "66", "altitude": "780 km" },
+    "sources": [{ "titre": "Iridium", "url": "https://www.iridium.com", "type": "industriel" }],
+    "multilingue": { "fr": "Iridium", "en": "Iridium", "de": "Iridium", "it": "Iridium" }
+  },
+  "globalstar": {
+    "number": 122, "type": "telecom", "application": "Constellation télécoms",
+    "definition": "Constellation de satellites de télécommunications mobiles.",
+    "specifications": { "fondation": "1991", "satellites": "24", "altitude": "1414 km" },
+    "sources": [{ "titre": "Globalstar", "url": "https://www.globalstar.com", "type": "industriel" }],
+    "multilingue": { "fr": "Globalstar", "en": "Globalstar", "de": "Globalstar", "it": "Globalstar" }
+  },
+  "iris2": {
+    "number": 62, "type": "telecom", "application": "Constellation européenne",
+    "definition": "Infrastructure de Résilience, d'Interconnexion et de Sécurité par Satellite.",
+    "specifications": { "budget": "6 Md€", "satellites": "290", "orbites": "LEO + MEO", "completion": "2030" },
+    "normes_ecss": ["ECSS-E-ST-50C"],
+    "sources": [{ "titre": "EU IRIS²", "url": "https://defence-industry-space.ec.europa.eu", "type": "site_officiel" }],
+    "multilingue": { "fr": "IRIS²", "en": "IRIS²", "de": "IRIS²", "it": "IRIS²" }
+  },
+  "euclid": {
+    "number": 54, "type": "mission", "application": "Télescope spatial ESA",
+    "definition": "Mission ESA d'étude de l'énergie noire et de la matière noire.",
+    "specifications": { "lancement": "2023", "telescope": "1.2 m", "orbite": "L2", "duree": "6 ans" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA Euclid", "url": "https://www.esa.int/Science_Exploration/Space_Science/Euclid", "type": "site_officiel" }],
+    "multilingue": { "fr": "Euclid", "en": "Euclid", "de": "Euclid", "it": "Euclid" }
+  },
+  "juice": {
+    "number": 48, "type": "mission", "application": "Mission ESA Jupiter",
+    "definition": "JUpiter ICy moons Explorer — mission ESA vers Jupiter.",
+    "specifications": { "lancement": "2023", "arrivee": "2031", "cibles": "Europe, Ganymède, Callisto" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA JUICE", "url": "https://www.esa.int/Science_Exploration/Space_Science/Juice", "type": "site_officiel" }],
+    "multilingue": { "fr": "JUICE", "en": "JUICE", "de": "JUICE", "it": "JUICE" }
+  },
+  "gaia": {
+    "number": 18, "type": "mission", "application": "Astrométrie ESA",
+    "definition": "Mission ESA d'astrométrie (cartographie de la Voie lactée).",
+    "specifications": { "lancement": "2013", "etoiles": "1.8 milliard", "orbite": "L2" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA Gaia", "url": "https://www.esa.int/Science_Exploration/Space_Science/Gaia", "type": "site_officiel" }],
+    "multilingue": { "fr": "Gaia", "en": "Gaia", "de": "Gaia", "it": "Gaia" }
+  },
+  "artemis": {
+    "number": 85, "type": "mission", "application": "Programme lunaire NASA/ESA",
+    "definition": "Programme lunaire international mené par la NASA avec l'ESA.",
+    "specifications": { "objectif": "Retour Lune", "artemis1": "2022 (test)", "artemis2": "2024-2025", "artemis3": "2025-2026 (atterrissage)" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "NASA Artemis", "url": "https://www.nasa.gov/artemis", "type": "site_officiel" }],
+    "multilingue": { "fr": "Artemis", "en": "Artemis", "de": "Artemis", "it": "Artemis" }
+  },
+  "jwst": {
+    "number": 60, "type": "mission", "application": "Télescope spatial NASA/ESA/CSA",
+    "definition": "James Webb Space Telescope — télescope spatial infrarouge.",
+    "specifications": { "lancement": "2021", "miroir": "6.5 m", "orbite": "L2", "cout": "10 Md€" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "NASA JWST", "url": "https://webb.nasa.gov", "type": "site_officiel" }],
+    "multilingue": { "fr": "JWST", "en": "JWST", "de": "JWST", "it": "JWST" }
+  },
+  "plato": {
+    "number": 71, "type": "mission", "application": "Télescope exoplanètes ESA",
+    "definition": "PLAnetary Transits and Oscillations of stars — mission ESA.",
+    "specifications": { "lancement": "2026", "objectif": "exoplanètes", "orbite": "L2" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA PLATO", "url": "https://www.esa.int/Science_Exploration/Space_Science/PLATO", "type": "site_officiel" }],
+    "multilingue": { "fr": "PLATO", "en": "PLATO", "de": "PLATO", "it": "PLATO" }
+  },
+  "ariel": {
+    "number": 57, "type": "mission", "application": "Télescope exoplanètes ESA",
+    "definition": "Atmospheric Remote-sensing Infrared Exoplanet Large-survey.",
+    "specifications": { "lancement": "2029", "objectif": "atmosphères exoplanètes", "orbite": "L2" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA ARIEL", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "ARIEL", "en": "ARIEL", "de": "ARIEL", "it": "ARIEL" }
+  },
+  "sentinel": {
+    "number": 103, "type": "mission", "application": "Satellites Copernicus",
+    "definition": "Famille de satellites d'observation de la Terre Copernicus.",
+    "specifications": { "familles": ["1 radar", "2 optique", "3 océan", "4 atmosphère", "5 atmosphère", "6 altimétrie"] },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA Sentinel", "url": "https://www.esa.int/Applications/Observing_the_Earth/Copernicus", "type": "site_officiel" }],
+    "multilingue": { "fr": "Sentinel", "en": "Sentinel", "de": "Sentinel", "it": "Sentinel" }
+  },
+  "meteosat": {
+    "number": 95, "type": "mission", "application": "Satellites météo EUMETSAT",
+    "definition": "Famille de satellites météorologiques géostationnaires.",
+    "specifications": { "generations": ["Meteosat 1-7", "MSG", "MTG"], "orbite": "GEO" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "EUMETSAT Meteosat", "url": "https://www.eumetsat.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Meteosat", "en": "Meteosat", "de": "Meteosat", "it": "Meteosat" }
+  },
+  "exomars": {
+    "number": 92, "type": "mission", "application": "Mission ESA-Roscosmos Mars",
+    "definition": "Programme d'exploration de Mars ESA-Roscosmos.",
+    "specifications": { "lancement": "2016", "rover": "Rosalind Franklin", "annulation": "2022" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA ExoMars", "url": "https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Exploration/ExoMars", "type": "site_officiel" }],
+    "multilingue": { "fr": "ExoMars", "en": "ExoMars", "de": "ExoMars", "it": "ExoMars" }
+  },
+  "bepicolombo": {
+    "number": 116, "type": "mission", "application": "Mission ESA-JAXA Mercure",
+    "definition": "Mission conjointe ESA-JAXA vers Mercure.",
+    "specifications": { "lancement": "2018", "arrivee": "2025", "cibles": "Mercure" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA BepiColombo", "url": "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo", "type": "site_officiel" }],
+    "multilingue": { "fr": "BepiColombo", "en": "BepiColombo", "de": "BepiColombo", "it": "BepiColombo" }
+  },
+  "solar-orbiter": {
+    "number": 139, "type": "mission", "application": "Sonde solaire ESA",
+    "definition": "Solar Orbiter — mission ESA d'observation du Soleil.",
+    "specifications": { "lancement": "2020", "orbite": "héliocentrique", "objectif": "pôles solaires" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA Solar Orbiter", "url": "https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter", "type": "site_officiel" }],
+    "multilingue": { "fr": "Solar Orbiter", "en": "Solar Orbiter", "de": "Solar Orbiter", "it": "Solar Orbiter" }
+  },
+  "cheops": {
+    "number": 63, "type": "mission", "application": "Télescope exoplanètes ESA",
+    "definition": "CHaracterising ExOPlanet Satellite.",
+    "specifications": { "lancement": "2019", "objectif": "exoplanètes", "orbite": "LEO" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA CHEOPS", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "CHEOPS", "en": "CHEOPS", "de": "CHEOPS", "it": "CHEOPS" }
+  },
+  "horizon": {
+    "number": 96, "type": "programme", "application": "Programme spatial ESA",
+    "definition": "Programme scientifique de l'ESA (cosmologie, planètes, physique).",
+    "specifications": { "budget": "206 M€/an", "missions": "Solar Orbiter, Euclid, JUICE" },
+    "normes_ecss": ["ECSS-M-ST-10C"],
+    "sources": [{ "titre": "ESA Cosmic Vision", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Horizon 2000", "en": "Horizon 2000", "de": "Horizon 2000", "it": "Horizon 2000" }
+  },
+  "cosmic-vision": {
+    "number": 144, "type": "programme", "application": "Programme spatial ESA",
+    "definition": "Programme scientifique ESA 2015-2035.",
+    "specifications": { "missions": ["Euclid", "JUICE", "PLATO", "ARIEL", "ATHENA"] },
+    "normes_ecss": ["ECSS-M-ST-10C"],
+    "sources": [{ "titre": "ESA Cosmic Vision", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Cosmic Vision", "en": "Cosmic Vision", "de": "Cosmic Vision", "it": "Cosmic Vision" }
+  },
+  "athena": {
+    "number": 62, "type": "mission", "application": "Télescope X ESA",
+    "definition": "Advanced Telescope for High-ENergy Astrophysics.",
+    "specifications": { "lancement": "2035", "miroir": "12 m", "orbite": "L2" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA ATHENA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "ATHENA", "en": "ATHENA", "de": "ATHENA", "it": "ATHENA" }
+  },
+  "lisa": {
+    "number": 39, "type": "mission", "application": "Détecteur ondes gravitationnelles",
+    "definition": "Laser Interferometer Space Antenna — détecteur spatial d'ondes gravitationnelles.",
+    "specifications": { "lancement": "2037", "bras": "2.5 millions km", "orbite": "héliocentrique" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "ESA LISA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "LISA", "en": "LISA", "de": "LISA", "it": "LISA" }
+  },
+  "nHRO": {
+    "number": 51, "type": "orbite", "application": "Orbite NRHO lunaire",
+    "definition": "Near-Rectilinear Halo Orbit — orbite de la station lunaire Gateway.",
+    "specifications": { "periode": "6.5 jours", "distance_lune": "3000 km - 70000 km" },
+    "normes_ecss": ["ECSS-E-ST-60C"],
+    "sources": [{ "titre": "NASA Gateway", "url": "https://www.nasa.gov", "type": "site_officiel" }],
+    "multilingue": { "fr": "Orbite NRHO", "en": "NRHO orbit", "de": "NRHO-Umlaufbahn", "it": "Orbita NRHO" }
+  },
+  "gateway": {
+    "number": 88, "type": "station", "application": "Station lunaire",
+    "definition": "Station spatiale en orbite lunaire (NASA/ESA/JAXA/CSA).",
+    "specifications": { "orbite": "NRHO", "modules": ["PPE", "HALO", "I-HAB", "ESPIRIT"], "completion": "2028" },
+    "normes_ecss": ["ECSS-E-ST-31C"],
+    "sources": [{ "titre": "NASA Gateway", "url": "https://www.nasa.gov/gateway", "type": "site_officiel" }],
+    "multilingue": { "fr": "Gateway", "en": "Gateway", "de": "Gateway", "it": "Gateway" }
+  },
+  "orion": {
+    "number": 65, "type": "station", "application": "Vaisseau lunaire NASA",
+    "definition": "Vaisseau spatial Orion pour missions lunaires Artemis.",
+    "specifications": { "equipage": "4", "duree": "21 jours", "diametre": "5 m", "masse": "10.4 t" },
+    "normes_ecss": ["ECSS-E-ST-31C"],
+    "sources": [{ "titre": "NASA Orion", "url": "https://www.nasa.gov/orion", "type": "site_officiel" }],
+    "multilingue": { "fr": "Orion", "en": "Orion", "de": "Orion", "it": "Orion" }
+  },
+  "sls": {
+    "number": 42, "type": "lanceur", "application": "Space Launch System",
+    "definition": "Lanceur lourd de la NASA pour missions Artemis.",
+    "specifications": { "hauteur": "98 m", "leo": "95000 kg", "poussee": "3810 t", "etages": "2 + boosters" },
+    "normes_ecss": ["ECSS-E-ST-32C"],
+    "sources": [{ "titre": "NASA SLS", "url": "https://www.nasa.gov/sls", "type": "site_officiel" }],
+    "multilingue": { "fr": "SLS", "en": "SLS", "de": "SLS", "it": "SLS" }
+  },
+  "starship": {
+    "number": 110, "type": "lanceur", "application": "Lanceur SpaceX réutilisable",
+    "definition": "Lanceur super-lourd réutilisable de SpaceX.",
+    "specifications": { "hauteur": "121 m", "leo": "150000 kg", "poussee": "7590 t", "reutilisable": "oui" },
+    "normes_ecss": [],
+    "sources": [{ "titre": "SpaceX Starship", "url": "https://www.spacex.com", "type": "industriel" }],
+    "multilingue": { "fr": "Starship", "en": "Starship", "de": "Starship", "it": "Starship" }
+  },
+  "falcon9": {
+    "number": 82, "type": "lanceur", "application": "Lanceur SpaceX réutilisable",
+    "definition": "Lanceur réutilisable de SpaceX, référence du marché.",
+    "specifications": { "hauteur": "70 m", "leo": "22800 kg", "gto": "8300 kg", "reutilisable": "oui", "lancements": "300+" },
+    "normes_ecss": [],
+    "sources": [{ "titre": "SpaceX Falcon 9", "url": "https://www.spacex.com", "type": "industriel" }],
+    "multilingue": { "fr": "Falcon 9", "en": "Falcon 9", "de": "Falcon 9", "it": "Falcon 9" }
+  },
+  "raptor": {
+    "number": 88, "type": "moteur", "application": "Moteur Starship",
+    "definition": "Moteur méthane/LOX de Starship (SpaceX).",
+    "specifications": { "poussee": "200 t", "isp": "380 s", "ergols": "CH4/LOX", "cycle": "full-flow staged" },
+    "normes_ecss": [],
+    "sources": [{ "titre": "SpaceX", "url": "https://www.spacex.com", "type": "industriel" }],
+    "multilingue": { "fr": "Raptor", "en": "Raptor", "de": "Raptor", "it": "Raptor" }
+  },
+  "merlin": {
+    "number": 71, "type": "moteur", "application": "Moteur Falcon 9",
+    "definition": "Moteur RP-1/LOX de Falcon 9 (SpaceX).",
+    "specifications": { "poussee": "85 t", "isp": "311 s", "ergols": "RP-1/LOX", "cycle": "générateur de gaz" },
+    "normes_ecss": [],
+    "sources": [{ "titre": "SpaceX", "url": "https://www.spacex.com", "type": "industriel" }],
+    "multilingue": { "fr": "Merlin", "en": "Merlin", "de": "Merlin", "it": "Merlin" }
+  },
+  "vulcain2": {
+    "number": 91, "type": "moteur", "application": "Moteur Ariane 5",
+    "definition": "Moteur cryogénique LH2/LOX de l'étage principal d'Ariane 5.",
+    "specifications": { "poussee": "135 t", "isp": "430 s", "ergols": "LH2/LOX" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ArianeGroup", "url": "https://www.ariane.group", "type": "industriel" }],
+    "multilingue": { "fr": "Vulcain 2", "en": "Vulcain 2", "de": "Vulcain 2", "it": "Vulcain 2" }
+  },
+  "hm7b": {
+    "number": 23, "type": "moteur", "application": "Moteur Ariane 5",
+    "definition": "Moteur cryogénique LH2/LOX de l'étage supérieur d'Ariane 5.",
+    "specifications": { "poussee": "67 kN", "isp": "446 s", "ergols": "LH2/LOX" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ArianeGroup", "url": "https://www.ariane.group", "type": "industriel" }],
+    "multilingue": { "fr": "HM7B", "en": "HM7B", "de": "HM7B", "it": "HM7B" }
+  },
+  "prometheus": {
+    "number": 140, "type": "moteur", "application": "Démonstrateur ESA",
+    "definition": "Moteur réutilisable méthane/LOX de nouvelle génération (ESA).",
+    "specifications": { "poussee": "100 t", "ergols": "CH4/LOX", "cout": "1 M€ (objectif)" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ESA Prometheus", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Prometheus", "en": "Prometheus", "de": "Prometheus", "it": "Prometheus" }
+  },
+  "themis": {
+    "number": 78, "type": "moteur", "application": "Démonstrateur ESA",
+    "definition": "Démonstrateur de premier étage réutilisable (ESA).",
+    "specifications": { "objectif": "réutilisabilité", "budget": "40 M€", "pays": "France, Allemagne, Suède" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ESA Themis", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "Themis", "en": "Themis", "de": "Themis", "it": "Themis" }
+  },
+  "callisto": {
+    "number": 94, "type": "moteur", "application": "Démonstrateur JAXA/CNES",
+    "definition": "Démonstrateur de lanceur réutilisable JAXA/CNES/DLR.",
+    "specifications": { "objectif": "atterrissage vertical", "budget": "20 M€" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "CNES Callisto", "url": "https://www.cnes.fr", "type": "site_officiel" }],
+    "multilingue": { "fr": "Callisto", "en": "Callisto", "de": "Callisto", "it": "Callisto" }
+  },
+  "maia": {
+    "number": 24, "type": "moteur", "application": "Booster réutilisable MaiaSpace",
+    "definition": "Moteur méthane/LOX pour booster réutilisable (MaiaSpace).",
+    "specifications": { "poussee": "~100 t", "ergols": "CH4/LOX", "reutilisable": "oui" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "MaiaSpace", "url": "https://www.maia-space.com", "type": "industriel" }],
+    "multilingue": { "fr": "Maia", "en": "Maia", "de": "Maia", "it": "Maia" }
+  },
+  "greta": {
+    "number": 51, "type": "moteur", "application": "Moteur vert ESA",
+    "definition": "Green Engine for New Space Transport — moteur écologique ESA.",
+    "specifications": { "poussee": "5 kN", "ergols": "H2O2/éthanol", "avantage": "non toxique" },
+    "normes_ecss": ["ECSS-E-ST-35C"],
+    "sources": [{ "titre": "ESA GRETA", "url": "https://www.esa.int", "type": "site_officiel" }],
+    "multilingue": { "fr": "GRETA", "en": "GRETA", "de": "GRETA", "it": "GRETA" }
+  }
+}

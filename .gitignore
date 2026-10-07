@@ -1,0 +1,28 @@
+# Clé API NASA (ne pas commiter !)
+nasa-config.js
+.nasa_api_key.txt
+
+# Node
+node_modules/
+package-lock.json
+
+# Sauvegardes
+*.bak
+*.bak2
+*.bak3
+*.bak-enrich
+*.bak-*
+
+# Fichiers temporaires
+lots-*.json
+exemples-esa.json
+
+# Scripts locaux
+*.sh
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

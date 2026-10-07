@@ -1,0 +1,232 @@
+openapi: 3.0.0
+info:
+  title: ESA Encyclopedia API
+  description: API REST pour l'Encyclopédie Ariane 6 ESA-ready
+  version: 4.0.0
+  contact:
+    name: gunout
+    url: https://gunout.github.io/encyclopedie-arianne/
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.encyclopedie-arianne.esa
+    description: Production
+  - url: http://localhost:3000
+    description: Développement
+
+tags:
+  - name: mots
+    description: Recherche et consultation des mots
+  - name: categories
+    description: Catégories de mots
+  - name: normes
+    description: Normes ECSS et CCSDS
+  - name: sources
+    description: Sources documentaires
+  - name: recherche
+    description: Recherche sémantique
+
+paths:
+  /api/v1/mots:
+    get:
+      tags: [mots]
+      summary: Liste tous les mots
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 100 }
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: categorie
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Liste des mots
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total: { type: integer }
+                  limit: { type: integer }
+                  offset: { type: integer }
+                  mots: { type: array, items: { $ref: '#/components/schemas/MotResume' } }
+
+  /api/v1/mots/{mot}:
+    get:
+      tags: [mots]
+      summary: Détails d'un mot
+      parameters:
+        - name: mot
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Détails du mot
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MotComplet' }
+        '404':
+          description: Mot non trouvé
+
+  /api/v1/mots/{mot}/specifications:
+    get:
+      tags: [mots]
+      summary: Spécifications techniques d'un mot
+      parameters:
+        - name: mot
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Spécifications
+          content:
+            application/json:
+              schema: { type: object, additionalProperties: true }
+
+  /api/v1/categories:
+    get:
+      tags: [categories]
+      summary: Liste des catégories
+      responses:
+        '200':
+          description: Catégories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    nom: { type: string }
+                    nombre: { type: integer }
+
+  /api/v1/normes:
+    get:
+      tags: [normes]
+      summary: Liste des normes ECSS/CCSDS
+      responses:
+        '200':
+          description: Normes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ecss: { type: array, items: { type: string } }
+                  ccsds: { type: array, items: { type: string } }
+
+  /api/v1/sources:
+    get:
+      tags: [sources]
+      summary: Liste des sources documentaires
+      responses:
+        '200':
+          description: Sources
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Source' } }
+
+  /api/v1/recherche:
+    get:
+      tags: [recherche]
+      summary: Recherche sémantique
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema: { type: string }
+        - name: categorie
+          in: query
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Résultats de recherche
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query: { type: string }
+                  total: { type: integer }
+                  resultats: { type: array, items: { $ref: '#/components/schemas/MotResume' } }
+
+  /api/v1/export/json:
+    get:
+      tags: [mots]
+      summary: Export JSON complet
+      responses:
+        '200':
+          description: Export JSON
+          content:
+            application/json:
+              schema: { type: object }
+
+  /api/v1/export/csv:
+    get:
+      tags: [mots]
+      summary: Export CSV complet
+      responses:
+        '200':
+          description: Export CSV
+          content:
+            text/csv:
+              schema: { type: string }
+
+components:
+  schemas:
+    MotResume:
+      type: object
+      properties:
+        mot: { type: string }
+        type: { type: string }
+        number: { type: integer }
+        application: { type: string }
+        definition: { type: string }
+
+    MotComplet:
+      type: object
+      properties:
+        mot: { type: string }
+        number: { type: integer }
+        type: { type: string }
+        application: { type: string }
+        definition: { type: string }
+        specifications: { type: object, additionalProperties: true }
+        normes_ecss: { type: array, items: { type: string } }
+        normes_ccsds: { type: array, items: { type: string } }
+        sources: { type: array, items: { $ref: '#/components/schemas/Source' } }
+        multilingue:
+          type: object
+          properties:
+            fr: { type: string }
+            en: { type: string }
+            de: { type: string }
+            it: { type: string }
+        couleur:
+          type: object
+          properties:
+            hex: { type: string }
+            rgb: { type: string }
+        hashs:
+          type: object
+          properties:
+            sha256: { type: string }
+            sha384: { type: string }
+            sha512: { type: string }
+
+    Source:
+      type: object
+      properties:
+        titre: { type: string }
+        url: { type: string, format: uri }
+        type: { type: string, enum: [site_officiel, specification, standard, industriel, publication] }

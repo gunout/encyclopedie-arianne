@@ -1,0 +1,15 @@
+{
+  "name": "ariane6-encyclopedie",
+  "version": "2.0.0",
+  "description": "Encyclopédie intelligente Ariane 6 · © gunout",
+  "main": "ariane6-api.js",
+  "scripts": {
+    "start": "node ariane6-api.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "author": "gunout",
+  "license": "MIT"
+}

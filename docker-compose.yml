@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./ariane6-complete.html:/usr/share/nginx/html/index.html:ro
+  api:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./ariane6-api.js:/app/ariane6-api.js:ro
+    command: sh -c "npm install express cors && node ariane6-api.js"
+    ports:
+      - "3000:3000"

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🚀 Monitor Spatial Expert+ — Ministère de l'Espace · © gunout</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bleu:#000091; --bleu-hi:#1212ff; --bleu-soft:#e3e3fd;
+  --rouge:#E1000F; --rouge-soft:#ffe9e9;
+  --or:#fbbf24; --or-hi:#f59e0b; --or-soft:rgba(251,191,36,.15);
+  --vert:#16a34a; --vert-soft:#dcfce7;
+  --violet:#7c3aed; --violet-soft:#ede9fe;
+  --cyan:#0891b2; --cyan-soft:#cffafe;
+  --rose:#db2777; --rose-soft:#fce7f3;
+  --gris-50:#f6f6f6; --gris-100:#eee; --gris-200:#e5e5e5;
+  --gris-500:#929292; --gris-700:#3a3a3a; --gris-900:#1e1e1e;
+  --mono:'SF Mono',Menlo,Consolas,monospace;
+  --sans:'Marianne',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --bg:#f6f6f6; --panel:#fff; --border:#e5e5e5; --text:#1e1e1e; --muted:#929292;
+}
+[data-theme="dark"]{
+  --bg:#12141a; --panel:#1a1d24; --border:#2a2e38; --text:#f0f2f5; --muted:#7a8090;
+  --bleu-soft:#1e1e4d; --rouge-soft:#3a1a1e; --vert-soft:#1a3a24; --violet-soft:#2a1e4d;
+  --cyan-soft:#0a2a30; --rose-soft:#3a1a2a; --gris-50:#12141a; --gris-100:#1e2129;
+  --gris-200:#2a2e38; --gris-500:#7a8090; --gris-700:#b8bcc6;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:13px;line-height:1.5;min-height:100vh;transition:background .3s,color .3s}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--gris-100)}
+::-webkit-scrollbar-thumb{background:var(--gris-500);border-radius:4px}
+
+.tricolore{height:6px;background:linear-gradient(to right,#000091 0 33.33%,#fff 33.33% 66.66%,#E1000F 66.66% 100%);position:fixed;top:0;left:0;right:0;z-index:1000}
+.header{display:flex;align-items:center;gap:12px;padding:16px 20px 10px;background:var(--panel);border-bottom:1px solid var(--border);margin-top:6px}
+.marianne{width:44px;height:44px;border-radius:50%;background:#000091;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;border:2px solid #E1000F;flex-shrink:0}
+.header-txt strong{display:block;color:var(--bleu);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+.header-txt span{font-size:11px;color:var(--gris-700)}
+.header-devise{margin-left:auto;font-size:9px;color:var(--gris-500);text-transform:uppercase;letter-spacing:1.2px;text-align:right}
+
+.topbar{background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:12px 20px;gap:12px;position:sticky;top:6px;z-index:100;flex-wrap:wrap}
+.brand{font-size:14px;font-weight:800;color:var(--bleu);display:flex;align-items:center;gap:8px}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--vert);box-shadow:0 0 0 3px rgba(22,163,74,.2);animation:pulse 1.8s infinite}
+.brand .dot.offline{background:var(--rouge);animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.topbar-right{margin-left:auto;display:flex;gap:10px;font-family:var(--mono);font-size:11px;align-items:center;flex-wrap:wrap}
+.stat{display:flex;gap:5px;color:var(--gris-700);align-items:center;white-space:nowrap}
+.stat .val{color:var(--bleu);font-weight:700;padding:2px 8px;border-radius:3px;background:var(--bleu-soft)}
+.stat .val.vert{color:var(--vert);background:var(--vert-soft)}
+.stat .val.violet{color:var(--violet);background:var(--violet-soft)}
+.theme-toggle{background:var(--panel);border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.theme-toggle:hover{background:var(--bleu-soft);border-color:var(--bleu);transform:scale(1.05)}
+
+.main-container{max-width:1400px;margin:0 auto;padding:20px}
+.search-section{background:var(--panel);padding:18px 20px;border-radius:12px;border:1px solid var(--border);margin-bottom:20px}
+.input-group{display:flex;gap:10px;flex-wrap:wrap}
+.input-group input{flex:1;min-width:180px;padding:12px 16px;border-radius:8px;border:2px solid var(--border);background:var(--bg);color:var(--text);font-size:14px;font-family:var(--mono)}
+.input-group input:focus{border-color:var(--bleu);outline:none;box-shadow:0 0 0 2px var(--bleu-soft)}
+.input-group button{padding:12px 20px;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.input-group button:hover{transform:scale(1.03)}
+.btn-primary{background:var(--bleu);color:#fff}
+.btn-random{background:var(--or);color:#1e1e1e}
+.btn-clear{background:var(--rouge);color:#fff}
+.btn-green{background:var(--vert);color:#fff}
+
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0;padding:12px;background:var(--gris-50);border-radius:10px;border:1px solid var(--border)}
+.filter-bar button{padding:6px 14px;border-radius:20px;border:2px solid var(--border);background:var(--panel);color:var(--gris-700);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.filter-bar button:hover{border-color:var(--bleu);color:var(--bleu)}
+.filter-bar button.active{background:var(--bleu);border-color:var(--bleu);color:#fff}
+.filter-count{font-size:10px;opacity:.7;margin-left:4px}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px}
+.kpi{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--bleu);border-radius:8px;padding:12px 14px}
+.kpi .label{font-size:10px;font-weight:700;color:var(--gris-500);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.kpi .value{font-size:20px;font-weight:800;color:var(--bleu);font-family:var(--mono);line-height:1.1}
+.kpi.vert{border-left-color:var(--vert)} .kpi.vert .value{color:var(--vert)}
+.kpi.or{border-left-color:var(--or)} .kpi.or .value{color:#8a5e00}
+.kpi.rouge{border-left-color:var(--rouge)} .kpi.rouge .value{color:var(--rouge)}
+.kpi.violet{border-left-color:var(--violet)} .kpi.violet .value{color:var(--violet)}
+
+.results{padding:0}
+.dashboard-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;padding:16px 20px;background:linear-gradient(135deg,var(--bleu),#1a1a6e);border-radius:12px;color:#fff}
+.dashboard-header h2{font-size:18px;color:#fff;font-weight:700}
+.dashboard-actions{display:flex;gap:8px;flex-wrap:wrap}
+.dashboard-actions button{padding:8px 14px;border-radius:8px;border:none;font-weight:600;font-size:12px;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.15);color:#fff}
+.dashboard-actions button:hover{background:rgba(255,255,255,.25)}
+
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.ariane-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;transition:all .2s}
+.ariane-card:hover{transform:translateY(-4px);border-color:var(--bleu);box-shadow:0 8px 24px rgba(0,0,145,.15)}
+.ariane-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.ariane-type{font-size:10px;padding:3px 10px;border-radius:10px;background:var(--bleu-soft);color:var(--bleu);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.ariane-color{width:22px;height:22px;border-radius:50%;border:2px solid var(--border)}
+.ariane-card-title{font-size:18px;font-weight:800;font-family:var(--mono);color:var(--bleu);margin-bottom:12px;word-break:break-all}
+.ariane-card-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.ariane-card-info .lbl{display:block;font-size:9px;color:var(--gris-500);text-transform:uppercase;font-weight:700;margin-bottom:2px}
+.ariane-card-info .val{font-size:11px;font-family:var(--mono);color:var(--gris-700);font-weight:600}
+.ariane-card-desc{font-size:11px;color:var(--gris-500);line-height:1.5;margin-bottom:12px;min-height:36px}
+.ariane-card-hash{display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--gris-50);border-radius:6px;margin-bottom:10px}
+.ariane-card-hash code{font-size:10px;color:var(--bleu);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mono)}
+.copy-btn{background:transparent;border:1px solid var(--border);color:var(--gris-500);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:9px;font-family:var(--mono)}
+.copy-btn:hover{border-color:var(--bleu);color:var(--bleu)}
+
+.pagination-bar{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin:24px 0;padding:16px;background:var(--panel);border-radius:10px;border:1px solid var(--border)}
+.pagination-bar button{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--panel);color:var(--text);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all .2s;min-width:40px;font-weight:700}
+.pagination-bar button:hover:not(:disabled){border-color:var(--bleu);color:var(--bleu);background:var(--bleu-soft)}
+.pagination-bar button.active{background:var(--bleu);border-color:var(--bleu);color:#fff}
+.pagination-bar button:disabled{opacity:.3;cursor:not-allowed}
+.pagination-info{color:var(--gris-500);font-size:12px;font-family:var(--mono);margin:0 12px;font-weight:600}
+
+.section-title{color:var(--bleu);font-size:14px;font-weight:700;margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--bleu)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px}
+.stat-card{background:var(--panel);padding:12px 16px;border-radius:10px;border:1px solid var(--border);border-left:4px solid var(--bleu)}
+.stat-card .label{color:var(--gris-500);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.stat-card .value{font-size:14px;font-weight:800;margin-top:4px;font-family:var(--mono);word-break:break-all;color:var(--bleu)}
+.value.bleu{color:var(--bleu)} .value.rouge{color:var(--rouge)} .value.vert{color:var(--vert)}
+
+.hash-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;background:var(--panel);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.hash-table th{color:var(--gris-500);padding:8px 12px;text-align:left;border-bottom:2px solid var(--border);font-size:10px;text-transform:uppercase;background:var(--gris-50);font-weight:700}
+.hash-table td{padding:8px 12px;border-bottom:1px solid var(--gris-100);color:var(--gris-700);word-break:break-all}
+.hash-table td:first-child{color:var(--bleu);white-space:nowrap;font-weight:700}
+.hash-table tr:hover td{background:var(--gris-50)}
+
+.relation-box{background:var(--panel);padding:16px 20px;border-radius:10px;border:2px solid var(--bleu);margin-bottom:16px}
+.relation-box .title{color:var(--bleu);font-weight:700;font-size:14px}
+.relation-box .content{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+.relation-box .item{background:var(--gris-50);padding:10px 16px;border-radius:8px;border:1px solid var(--border);font-family:var(--mono);font-size:13px}
+.relation-box .item .lbl{color:var(--gris-500);font-size:10px;text-transform:uppercase;font-weight:700}
+.relation-box .item .val{color:var(--bleu);font-weight:700}
+
+.placeholder{text-align:center;padding:80px 20px;color:var(--gris-500)}
+.placeholder .icon{font-size:64px;margin-bottom:20px}
+.placeholder .title{font-weight:700;color:var(--text);font-size:18px;margin-bottom:8px}
+
+.footer{text-align:center;padding:30px 20px 20px;border-top:1px solid var(--border);margin-top:30px}
+.flag-mini{display:inline-flex;width:48px;height:32px;border-radius:4px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px}
+.flag-stripe{flex:1}
+.f-bleu{background:#000091} .f-blanc{background:#fff} .f-rouge{background:#E1000F}
+.devise{color:var(--gris-700);font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.copyright{color:var(--gris-500);font-size:12px;font-family:var(--mono)}
+.copyright .signature-gunout{font-weight:800;font-size:14px;letter-spacing:2px;background:linear-gradient(90deg,var(--bleu),var(--rouge));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+.toast{position:fixed;bottom:24px;right:24px;background:var(--gris-900);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:600;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .3s;font-family:var(--mono)}
+.toast.show{opacity:1}
+
+@media(max-width:600px){
+  .header h1{font-size:1.2rem}
+  .input-group{flex-direction:column}
+  .input-group input{width:100%}
+  .input-group button{width:100%}
+  .stats-grid{grid-template-columns:1fr}
+  .dashboard-grid{grid-template-columns:1fr}
+  .header-devise{display:none}
+}
+.chart-container{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;overflow:hidden}
+.chart-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.chart-legend span{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gris-700);font-weight:600}
+.chart-legend .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gris-700);font-family:var(--mono);font-weight:600}
+.legend-item .dot{width:14px;height:14px;border-radius:50%;display:inline-block}
+</style>
+<script src="graphiques-master.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+<div class="tricolore"></div>
+
+<div class="header">
+  <div class="marianne">RF</div>
+  <div class="header-txt">
+    <strong>Ministère de l'Espace · ESA · CNES · ArianeGroup</strong>
+    <span>Monitor Spatial Expert+ — Encyclopédie Ariane 6 · © gunout</span>
+  </div>
+  <div class="header-devise"><em>Liberté</em><br><em>Égalité</em><br><em>Fraternité</em></div>
+</div>
+
+<div class="topbar">
+  <div class="brand"><span class="dot offline" id="statusDot"></span>MONITOR SPATIAL EXPERT+ <span style="color:var(--muted);font-size:12px">/ 2027</span></div>
+  <div class="topbar-right">
+    <div class="stat"><span>MOTS</span><span class="val vert" id="tbFiles">0</span></div>
+    <div class="stat"><span>CATÉGORIES</span><span class="val" id="tbDatasets">0</span></div>
+    <div class="stat"><span>SÉRIES</span><span class="val violet" id="tbSeries">0</span></div>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="search-section">
+    <div class="input-group">
+      <input type="text" id="searchInput" placeholder="🔍 Rechercher un mot (vulcain, newton, adn…)" />
+      <button class="btn-primary" onclick="analyze()">🔍 Analyser</button>
+      <button class="btn-random" onclick="randomAriane6()">🎲 Aléatoire</button>
+      <button class="btn-green" onclick="openAriane6Dashboard()">📊 Dashboard</button>
+        <button class="btn-green" onclick="openESADashboard()">🇪🇺 ESA</button>
+        <button class="btn-green" onclick="openQuiz()">🎯 Quiz</button>
+        <button class="btn-green" onclick="genererPDF()">📄 PDF</button>
+        <button class="btn-green" onclick="openAPOD()">🌌 APOD</button>
+        <button class="btn-green" onclick="openNeoWs()">☄️ NeoWs</button>
+        
+        <button class="btn-green" onclick="openExoplanet()">🪐 Exoplanètes</button>
+        <button class="btn-green" onclick="openAPODCarousel()">🎠 Carrousel</button>
+        
+        
+        <button class="btn-green" onclick="openCarte3D()">🗺️ 3D</button>
+        <button class="btn-green" onclick="openISS3D()">🛰️ ISS</button>
+        <button class="btn-green" onclick="openAriane6ChartsAll()">📈 Graphiques</button>
+        <button class="btn-green" onclick="openVerification()">✓ Vérification</button>
+        <button class="btn-green" onclick="openSimulateur()">🧪 Simulateur</button>
+
+      <button class="btn-clear" onclick="clearResults()">✖ Effacer</button>
+    </div>
+    <div class="filter-bar" id="filterBar"></div>
+  </div>
+
+  <div class="kpi-strip" id="kpiStrip"></div>
+
+  <div id="results">
+    <div class="placeholder">
+      <div class="icon">🚀</div>
+      <div class="title">Encyclopédie Ariane 6</div>
+      <div>Chargement des 2027 mots…</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="flag-mini"><div class="flag-stripe f-bleu"></div><div class="flag-stripe f-blanc"></div><div class="flag-stripe f-rouge"></div></div>
+    <div class="devise">Liberté · Égalité · Fraternité</div>
+    <div class="copyright">© <span id="copyrightYear">2026</span> · <span class="signature-gunout">gunout</span> · Tous droits réservés</div>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+// ============================================================
+// CHARGEMENT DYNAMIQUE DE LA BASE
+// ============================================================
+let ARIANE6_DB = {};
+const utf8 = new TextEncoder();
+
+async function loadDB() {
+  try {
+    const response = await fetch('ariane6-db.json');
+    const data = await response.json();
+    ARIANE6_DB = data.mots || data;
+    console.log(`✅ Base chargée : ${Object.keys(ARIANE6_DB).length} mots`);
+    return true;
+  } catch (error) {
+    console.error('❌ Erreur chargement DB:', error);
+    // Fallback : essayer ariane6-db.js
+    try {
+      const script = document.createElement('script');
+      script.src = 'ariane6-db.js';
+      document.head.appendChild(script);
+      await new Promise(r => script.onload = r);
+      ARIANE6_DB = window.ARIANE6_DB || {};
+      console.log(`✅ Base chargée (JS) : ${Object.keys(ARIANE6_DB).length} mots`);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
+// ============================================================
+// FONCTIONS UTILITAIRES
+// ============================================================
+function encodeBase10(w) { return w.toUpperCase().split('').map(c => c.charCodeAt(0) - 64).filter(n => n >= 1 && n <= 26).join('.'); }
+function decodeBase10(s) { return s.split('.').map(n => { const num = parseInt(n); return (num >= 1 && num <= 26) ? String.fromCharCode(64 + num) : '?'; }).join(''); }
+function sommeA1Z26(w) { return w.toUpperCase().split('').map(c => c.charCodeAt(0) - 64).filter(n => n >= 1 && n <= 26).reduce((a, b) => a + b, 0); }
+function hashFnv1a(str) { let h = 0x811c9dc5; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = (h * 0x01000193) >>> 0; } return h; }
+function couleurDepuisHash(str) { const h = hashFnv1a(str); const hex = '#' + (h & 0xFFFFFF).toString(16).padStart(6, '0'); const r = (h >> 16) & 0xFF, g = (h >> 8) & 0xFF, b = h & 0xFF; return { hex, rgb: `RGB(${r}, ${g}, ${b})` }; }
+function toBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+async function hashWebCrypto(algo, text) { const data = utf8.encode(text); const buf = await crypto.subtle.digest(algo, data); return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(''); }
+function renderCard(label, value, className = '') { return `<div class="stat-card"><div class="label">${label}</div><div class="value ${className}">${value}</div></div>`; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._timeout); t._timeout = setTimeout(() => t.classList.remove('show'), 2500); }
+window.copyText = function(text) { navigator.clipboard.writeText(text).then(() => showToast('✅ Copié')).catch(() => showToast('❌ Erreur')); };
+
+// ============================================================
+// ANALYSE D'UN MOT
+// ============================================================
+async function analyzeAriane6(mot) {
+  const key = mot.toLowerCase().trim();
+  const entry = ARIANE6_DB[key];
+  if (!entry) return null;
+  const base10Seq = encodeBase10(mot);
+  const decoded = decodeBase10(base10Seq);
+  const somme = sommeA1Z26(mot);
+  const couleur = couleurDepuisHash(mot);
+  const b64 = toBase64(mot.toUpperCase());
+  const sha256 = await hashWebCrypto('SHA-256', mot).catch(() => '—');
+  const sha384 = await hashWebCrypto('SHA-384', mot).catch(() => '—');
+  const sha512 = await hashWebCrypto('SHA-512', mot).catch(() => '—');
+  return `
+  <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
+    <span class="ariane-type">${entry.type.toUpperCase()}</span>
+    <span style="font-size:32px; font-weight:800; color:var(--bleu); font-family:var(--mono);">${mot.toUpperCase()}</span>
+    <span style="color:var(--gris-500); font-size:12px;">${mot.length} caractères</span>
+  </div>
+  <div class="section-title">🔓 Décodage Base 10 (A1Z26)</div>
+  <div class="relation-box">
+    <div class="content">
+      <div class="item"><div class="lbl">Encodage</div><div class="val">${base10Seq}</div></div>
+      <div class="item"><div class="lbl">Décodage</div><div class="val">${decoded}</div></div>
+      <div class="item"><div class="lbl">Somme A1Z26</div><div class="val">${somme}</div></div>
+    </div>
+  </div>
+  <div class="section-title">🚀 Fiche technique</div>
+  <div class="stats-grid">
+    ${renderCard('Type', entry.type, 'vert')}
+    ${renderCard('Poussée', entry.poussee || '—', '')}
+    ${renderCard('Ergols', entry.ergols || '—', '')}
+    ${renderCard('Application', entry.application, 'bleu')}
+    ${renderCard('Nombre associé', entry.number, 'rouge')}
+  </div>
+  <div class="section-title"><span>📖</span> Définition ESA</div>
+  <div class="relation-box">
+    <div class="content">
+      <div class="item" style="flex:1; min-width:280px;">
+        <div class="val" style="color:#ddd; font-size:0.85rem;">${entry.definition || entry.application || '—'}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title"><span>📊</span> Spécifications techniques</div>
+  <div class="stats-grid">
+    ${entry.specifications ? Object.entries(entry.specifications).map(([k, v]) => renderCard(k.replace(/_/g, ' ').toUpperCase(), v, 'blanc')).join('') : renderCard('Données', 'Non disponibles', '')}
+  </div>
+
+  <div class="section-title"><span>📋</span> Normes ECSS</div>
+  <div class="relation-box">
+    <div class="content">
+      ${entry.normes_ecss && entry.normes_ecss.length ? entry.normes_ecss.map(n => '<div class="item"><div class="lbl">ECSS</div><div class="val" style="color:#4A90E2;">' + n + '</div></div>').join('') : '<div class="item"><div class="val">—</div></div>'}
+    </div>
+  </div>
+
+  <div class="section-title"><span>🔗</span> Sources documentaires</div>
+  <div class="stats-grid">
+    ${entry.sources && entry.sources.length ? entry.sources.map(s => '<div class="stat-card"><div class="label">' + (s.type || 'source').toUpperCase() + '</div><div class="value bleu"><a href="' + s.url + '" target="_blank" style="color:#4A90E2;text-decoration:none;">' + s.titre + '</a></div></div>').join('') : renderCard('Source', 'ESA', 'bleu')}
+  </div>
+
+  <div class="section-title"><span>🌐</span> Multilingue</div>
+  <div class="stats-grid">
+    ${entry.multilingue ? Object.entries(entry.multilingue).map(([lang, mot]) => renderCard(lang.toUpperCase(), mot, 'vert')).join('') : renderCard('FR', mot, 'vert')}
+  </div>
+
+  <div class="section-title">🎨 Couleur signature</div>
+  <div class="relation-box" style="border-color:${couleur.hex};">
+    <div class="content">
+      <div class="item"><div class="lbl">Hexadécimal</div><div class="val" style="color:${couleur.hex};">${couleur.hex}</div></div>
+      <div class="item"><div class="lbl">RGB</div><div class="val">${couleur.rgb}</div></div>
+      <div class="item" style="background:${couleur.hex}; width:60px; height:60px; border-radius:8px;"></div>
+    </div>
+  </div>
+  <div class="section-title">🔐 Hashs cryptographiques vérifiés</div>
+  <table class="hash-table">
+    <thead><tr><th>Algorithme</th><th>Empreinte</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>SHA-256 ✓</td><td>${sha256}</td><td><button class="copy-btn" onclick="copyText('${sha256}')">Copier</button></td></tr>
+      <tr><td>SHA-384 ✓</td><td>${sha384}</td><td><button class="copy-btn" onclick="copyText('${sha384}')">Copier</button></td></tr>
+      <tr><td>SHA-512 ✓</td><td>${sha512}</td><td><button class="copy-btn" onclick="copyText('${sha512}')">Copier</button></td></tr>
+      <tr><td>Base64</td><td>${b64}</td><td><button class="copy-btn" onclick="copyText('${b64}')">Copier</button></td></tr>
+    </tbody>
+  </table>`;
+}
+
+// ============================================================
+// PAGINATION DU DASHBOARD
+// ============================================================
+let pageActuelle = 0;
+let filtreActif = 'all';
+const CARTES_PAR_PAGE = 24;
+
+async function renderAriane6Dashboard(page = 0) {
+  pageActuelle = page;
+  let tousMots = Object.keys(ARIANE6_DB).sort();
+  
+  // Filtrer par catégorie
+  if (filtreActif !== 'all') {
+    tousMots = tousMots.filter(m => ARIANE6_DB[m].type === filtreActif);
+  }
+  
+  const total = tousMots.length;
+  const totalPages = Math.ceil(total / CARTES_PAR_PAGE);
+  const debut = page * CARTES_PAR_PAGE;
+  const fin = Math.min(debut + CARTES_PAR_PAGE, total);
+  const motsPage = tousMots.slice(debut, fin);
+  
+  const cards = [];
+  for (const mot of motsPage) {
+    const entry = ARIANE6_DB[mot];
+    const couleur = couleurDepuisHash(mot);
+    const somme = sommeA1Z26(mot);
+    const sha256 = await hashWebCrypto('SHA-256', mot).catch(() => '—');
+    cards.push(`
+    <div class="ariane-card" style="border-left:4px solid ${couleur.hex};">
+      <div class="ariane-card-header">
+        <span class="ariane-type">${entry.type}</span>
+        <span class="ariane-color" style="background:${couleur.hex};"></span>
+      </div>
+      <div class="ariane-card-title">${mot.toUpperCase()}</div>
+      <div class="ariane-card-info">
+        <div><span class="lbl">Poussée</span><span class="val">${entry.poussee || '—'}</span></div>
+        <div><span class="lbl">Ergols</span><span class="val">${entry.ergols || '—'}</span></div>
+        <div><span class="lbl">Somme A1Z26</span><span class="val">${somme}</span></div>
+        <div><span class="lbl">Couleur</span><span class="val" style="color:${couleur.hex};">${couleur.hex}</span></div>
+      </div>
+      <div class="ariane-card-desc">${entry.application}</div>
+      <div class="ariane-card-hash">
+        <code>${sha256.slice(0, 32)}...</code>
+        <button class="copy-btn" onclick="copyText('${sha256}')">Copier</button>
+      </div>
+      <button class="btn-primary" style="width:100%; padding:8px; border-radius:6px; font-size:12px;" onclick="quickSearch('${mot}')">🔍 Analyser</button>
+    </div>`);
+  }
+  
+  const pagination = renderPagination(page, totalPages, total);
+  const filtreLabel = filtreActif === 'all' ? 'toutes catégories' : filtreActif;
+  
+  return `
+  <div class="dashboard-header">
+    <h2>🚀 Tableau de bord — ${total} mots (${filtreLabel})</h2>
+    <div class="dashboard-actions">
+      <button onclick="downloadAriane6JSON()">📤 JSON</button>
+      <button onclick="downloadAriane6CSV()">📄 CSV</button>
+      <button onclick="clearResults()">✖ Fermer</button>
+    </div>
+  </div>
+  <div class="pagination-bar">${pagination}</div>
+  <div class="dashboard-grid">${cards.join('')}</div>
+  <div class="pagination-bar">${pagination}</div>`;
+}
+
+function renderPagination(page, totalPages, total) {
+  if (totalPages <= 1) return `<span class="pagination-info">${total} mots</span>`;
+  let html = '';
+  html += `<button ${page === 0 ? 'disabled' : ''} onclick="goToPage(0)">⏮</button>`;
+  html += `<button ${page === 0 ? 'disabled' : ''} onclick="goToPage(${page - 1})">←</button>`;
+  const start = Math.max(0, page - 2);
+  const end = Math.min(totalPages, start + 5);
+  if (start > 0) {
+    html += `<button onclick="goToPage(0)">1</button>`;
+    if (start > 1) html += `<span class="pagination-info">…</span>`;
+  }
+  for (let i = start; i < end; i++) {
+    html += `<button class="${i === page ? 'active' : ''}" onclick="goToPage(${i})">${i + 1}</button>`;
+  }
+  if (end < totalPages) {
+    if (end < totalPages - 1) html += `<span class="pagination-info">…</span>`;
+    html += `<button onclick="goToPage(${totalPages - 1})">${totalPages}</button>`;
+  }
+  html += `<button ${page === totalPages - 1 ? 'disabled' : ''} onclick="goToPage(${page + 1})">→</button>`;
+  html += `<button ${page === totalPages - 1 ? 'disabled' : ''} onclick="goToPage(${totalPages - 1})">⏭</button>`;
+  html += `<span class="pagination-info">Page ${page + 1} / ${totalPages} · ${total} mots</span>`;
+  return html;
+}
+
+async function goToPage(page) {
+  const r = document.getElementById('results');
+  r.innerHTML = await renderAriane6Dashboard(page);
+  r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+window.goToPage = goToPage;
+
+async function openAriane6Dashboard() {
+  const r = document.getElementById('results');
+  r.innerHTML = await renderAriane6Dashboard(0);
+  r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+window.openAriane6Dashboard = openAriane6Dashboard;
+
+// ============================================================
+// FILTRES PAR CATÉGORIE
+// ============================================================
+function renderFilterBar() {
+  const fb = document.getElementById('filterBar');
+  if (!fb) return;
+  
+  const types = {};
+  Object.entries(ARIANE6_DB).forEach(([mot, info]) => {
+    types[info.type] = (types[info.type] || 0) + 1;
+  });
+  
+  const allBtn = document.createElement('button');
+  allBtn.textContent = `Tout (${Object.keys(ARIANE6_DB).length})`;
+  allBtn.className = filtreActif === 'all' ? 'active' : '';
+  allBtn.onclick = () => { filtreActif = 'all'; renderFilterBar(); openAriane6Dashboard(); };
+  fb.appendChild(allBtn);
+  
+  Object.entries(types).sort((a,b) => b[1] - a[1]).forEach(([type, count]) => {
+    const b = document.createElement('button');
+    b.innerHTML = `${type} <span class="filter-count">${count}</span>`;
+    b.className = filtreActif === type ? 'active' : '';
+    b.onclick = () => { filtreActif = type; renderFilterBar(); openAriane6Dashboard(); };
+    fb.appendChild(b);
+  });
+}
+
+// ============================================================
+// KPIs
+// ============================================================
+function renderKPIs() {
+  const total = Object.keys(ARIANE6_DB).length;
+  const types = new Set(Object.values(ARIANE6_DB).map(d => d.type));
+  document.getElementById('kpiStrip').innerHTML = `
+    <div class="kpi vert"><div class="label">Mots</div><div class="value">${total}</div></div>
+    <div class="kpi"><div class="label">Catégories</div><div class="value">${types.size}</div></div>
+    <div class="kpi violet"><div class="label">Hashs</div><div class="value">SHA</div></div>
+    <div class="kpi or"><div class="label">Licence</div><div class="value">MIT</div></div>
+  `;
+  document.getElementById('tbFiles').textContent = total;
+  document.getElementById('tbDatasets').textContent = types.size;
+  document.getElementById('tbSeries').textContent = 'SHA-256';
+}
+
+// ============================================================
+// FONCTIONS INTERACTIVES
+// ============================================================
+window.quickSearch = function(value) {
+  document.getElementById('searchInput').value = value;
+  analyze();
+};
+
+window.randomAriane6 = function() {
+  const mots = Object.keys(ARIANE6_DB);
+  const random = mots[Math.floor(Math.random() * mots.length)];
+  document.getElementById('searchInput').value = random;
+  analyze();
+};
+
+window.clearResults = function() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('results').innerHTML = `
+    <div class="placeholder">
+      <div class="icon">🚀</div>
+      <div class="title">Encyclopédie Ariane 6</div>
+      <div>Entrez un mot-clé ou cliquez sur Dashboard</div>
+    </div>`;
+};
+
+async function analyze() {
+  const input = document.getElementById('searchInput').value.trim();
+  if (!input) { showToast('⚠️ Entrez un mot'); return; }
+  const key = input.toLowerCase();
+  const r = document.getElementById('results');
+  if (ARIANE6_DB[key]) {
+    r.innerHTML = await analyzeAriane6(input);
+    r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    r.innerHTML = `
+      <div class="placeholder">
+        <div class="icon">❌</div>
+        <div class="title">"${input}" n'est pas dans la base</div>
+        <div>Essayez : vulcain, newton, adn, qubit…</div>
+      </div>`;
+  }
+}
+window.analyze = analyze;
+
+// ============================================================
+// EXPORTS
+// ============================================================
+async function downloadAriane6JSON() {
+  const data = {
+    meta: { titre: 'Encyclopédie Ariane 6', version: '3.0', auteur: 'gunout', date: new Date().toISOString() },
+    mots: {}
+  };
+  for (const [mot, entry] of Object.entries(ARIANE6_DB)) {
+    const sha256 = await hashWebCrypto('SHA-256', mot).catch(() => null);
+    data.mots[mot] = { ...entry, couleur: couleurDepuisHash(mot), hashs: { sha256 } };
+  }
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ariane6-encyclopedie-${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('📤 JSON exporté');
+}
+window.downloadAriane6JSON = downloadAriane6JSON;
+
+async function downloadAriane6CSV() {
+  const headers = ['Mot', 'Type', 'Poussée', 'Ergols', 'Application', 'Somme A1Z26', 'Couleur'];
+  const rows = [];
+  for (const [mot, entry] of Object.entries(ARIANE6_DB)) {
+    rows.push([mot.toUpperCase(), entry.type, entry.poussee || '', entry.ergols || '', `"${entry.application}"`, sommeA1Z26(mot), couleurDepuisHash(mot).hex]);
+  }
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv; charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ariane6-encyclopedie-${Date.now()}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('📄 CSV exporté');
+}
+window.downloadAriane6CSV = downloadAriane6CSV;
+
+// ============================================================
+// THÈME
+// ============================================================
+const themeToggle = document.getElementById('themeToggle');
+let theme = localStorage.getItem('monitor-theme') || 'light';
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+themeToggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('monitor-theme', theme);
+  applyTheme();
+});
+
+// ============================================================
+// INITIALISATION
+// ============================================================
+document.addEventListener('DOMContentLoaded', async () => {
+  applyTheme();
+  document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+  
+  const ok = await loadDB();
+  if (!ok) {
+    document.getElementById('results').innerHTML = `
+      <div class="placeholder">
+        <div class="icon">❌</div>
+        <div class="title">Impossible de charger ariane6-db.json</div>
+        <div>Vérifiez que le fichier est dans le même dossier</div>
+      </div>`;
+    return;
+  }
+  
+  const dot = document.getElementById('statusDot');
+  if (dot) dot.classList.remove('offline');
+  
+  renderFilterBar();
+  renderKPIs();
+  clearResults();
+  showToast(`✅ ${Object.keys(ARIANE6_DB).length} mots chargés`);
+});
+
+// Raccourci clavier
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && document.activeElement === document.getElementById('searchInput')) analyze();
+  if (e.key === '/' && !['INPUT','TEXTAREA'].includes(e.target.tagName)) {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+});
+</script>
+<script src="api-integration.js"></script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js").then(r=>console.log("✅ SW")).catch(e=>console.error("❌ SW",e));});}</script>
+<script src="esa-dashboard.js"></script>
+<script src="quiz.js"></script>
+<script src="pdf-generator.js"></script>
+<script src="nasa-config.js"></script>
+<script src="nasa-apod.js"></script>
+<script src="nasa-apis.js"></script>
+<script src="carte-3d.js">
+// ============================================================
+// ✓ VÉRIFICATION CROISÉE — Tests RFC/NIST
+// ============================================================
+
+        ${renderCard('Avec définition', Object.values(ARIANE6_DB).filter(d => d.definition).length, 'vert')}
+        ${renderCard('Avec normes ECSS', Object.values(ARIANE6_DB).filter(d => d.normes_ecss && d.normes_ecss.length).length, 'or')}
+        ${renderCard('Avec sources', Object.values(ARIANE6_DB).filter(d => d.sources && d.sources.length).length, 'violet')}
+      </div>
+    </div>
+  `;
+  r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+
+// ============================================================
+// 🧪 SIMULATEUR — Cadence et budget ESA
+// ============================================================
+);
+  runSim();
+}
+
+</span></div>
+      <div class="row"><span class="k">Coût par vol</span><span class="v">${coutVol} M€</span></div>
+      <div class="row"><span class="k">Coût total annuel</span><span class="v rouge">${coutTotal.toLocaleString('fr-FR')} M€</span></div>
+      <div class="row"><span class="k">Budget annuel</span><span class="v bleu">${budget.toLocaleString('fr-FR')} M€</span></div>
+      <div class="row"><span class="k">Reste</span><span class="v ${rentable ? 'vert' : 'rouge'}">${reste.toLocaleString('fr-FR')} M€</span></div>
+      <div class="row"><span class="k">Statut</span><span class="v ${rentable ? 'vert' : 'rouge'}">${rentable ? '✅ Rentable' : '❌ Déficit'}</span></div>
+    `;
+  }
+
+  // Comparaison avec d'autres agences
+  const comp = document.getElementById('simComparaison');
+  if (comp) {
+    const agences = [
+      { nom: 'ESA', cadence: cad, budget: budget, coutVol: coutVol },
+      { nom: 'NASA', cadence: 90, budget: 73000, coutVol: 150 },
+      { nom: 'SpaceX', cadence: 95, budget: 10000, coutVol: 30 },
+      { nom: 'CNSA', cadence: 65, budget: 19000, coutVol: 80 }
+    ];
+    const maxCad = Math.max(...agences.map(a => a.cadence));
+    comp.innerHTML = agences.map(a => `
+      <div class="bar-row">
+        <div class="name">${a.nom}</div>
+        <div class="bar-track"><div class="bar-fill ${a.nom === 'ESA' ? '' : 'vert'}" style="width:${(a.cadence / maxCad) * 100}%"></div></div>
+        <div class="val">${a.cadence}</div>
+      </div>
+    `).join('');
+  }
+}
+
+window.runSim = runSim;
+
+</script>
+<script src="verification-simulateur.js"></script>
+<script src="apod-carousel.js"></script>
+
+<script src="exoplanet.js"></script>
+<script src="iss-3d.js"></script>
+</body>
+</html>
