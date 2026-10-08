@@ -305,8 +305,10 @@ GitHub : https://github.com/gunout
 
 ---
 
-< div align="center">
-**🚀 Fait avec passion pour l'aérospatiale**
+<div align="center">
 
-**© 2026 gunout · Tous droits réservés**
+  **🚀 Fait avec passion pour l'aérospatiale**
+  
+  **© 2026 gunout · Tous droits réservés**
+
 </div>
