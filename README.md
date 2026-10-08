@@ -293,7 +293,8 @@ GitHub : https://github.com/gunout
 
 ---
 <div align="center">
-## 📊 Statistiques
+
+  ## 📊 Statistiques
 
 ![GitHub stars](https://img.shields.io/github/stars/gunout/encyclopedie-arianne?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/gunout/encyclopedie-arianne?style=social)
