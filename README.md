@@ -1,5 +1,6 @@
 <div align="center">
-# 🚀 Encyclopédie Ariane 6
+
+  # 🚀 Encyclopédie Ariane 6
 
 ![Version](https://img.shields.io/badge/version-4.0.0-339f82?style=flat-square)
 ![Mots](https://img.shields.io/badge/mots-2458-EF4135?style=flat-square)
