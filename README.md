@@ -1,3 +1,4 @@
+<div align="center">
 # 🚀 Encyclopédie Ariane 6
 
 ![Version](https://img.shields.io/badge/version-4.0.0-339f82?style=flat-square)
@@ -15,6 +16,7 @@
 ![Base64](https://img.shields.io/badge/Base64-RFC_4648-0055A4?style=flat-square)
 
 **Mots ↔ Nombres ↔ Hashs · Propulsion spatiale · © gunout**
+</div>
 
 ---
 
@@ -289,7 +291,7 @@ GitHub : https://github.com/gunout
 - Arianespace — Opérateur commercial
 
 ---
-
+<div align="center">
 ## 📊 Statistiques
 
 ![GitHub stars](https://img.shields.io/github/stars/gunout/encyclopedie-arianne?style=social)
@@ -297,9 +299,12 @@ GitHub : https://github.com/gunout
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/gunout/encyclopedie-arianne?style=flat-square)
 ![GitHub repo size](https://img.shields.io/github/repo-size/gunout/encyclopedie-arianne?style=flat-square)
+</div>
 
 ---
 
+< div align="center">
 **🚀 Fait avec passion pour l'aérospatiale**
 
 **© 2026 gunout · Tous droits réservés**
+</div>
